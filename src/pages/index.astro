@@ -5,6 +5,7 @@ import Chase from '../components/Chase.astro';
 import Ending from '../components/Ending.astro';
 import Groups from '../components/Groups.astro';
 import Hero from '../components/Hero.astro';
+import Nav from '../components/Nav.astro';
 import PayBack from '../components/PayBack.astro';
 import Slips from '../components/Slips.astro';
 import SplitIt from '../components/SplitIt.astro';
@@ -26,6 +27,7 @@ const description = 'taab works out who owes what, reminds people for you and sh
     <meta property="og:description" content={description} />
   </head>
   <body>
+    <Nav />
     <main>
       <Hero />
       <Chase />

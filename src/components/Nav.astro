@@ -1,0 +1,155 @@
+---
+import { NOTIFY_URL } from '../lib/links';
+import { LOGO_SPLIT } from '../lib/logo-paths';
+
+/**
+ * A compact dark bar floating at the top: the cyan app icon, the name of the
+ * section you're reading, and "Get notified".
+ */
+const W = 448;
+const H = 223;
+const size = 1024;
+const scale = (size * 0.62) / W;
+const dx = (size - W * scale) / 2;
+const dy = (size - H * scale) / 2;
+---
+
+<header class="nav">
+  <a class="logo" href="#hero" aria-label="taab, back to the top">
+    <svg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+      <rect width={size} height={size} rx="230" fill="#4ED2D4"></rect>
+      <g transform={`translate(${dx} ${dy}) scale(${scale})`} fill="#0F0F0C">
+        <path d={LOGO_SPLIT.t} fill-rule="evenodd"></path>
+        <path d={LOGO_SPLIT.a} fill-rule="evenodd"></path>
+        <path d={LOGO_SPLIT.b} fill-rule="evenodd"></path>
+      </g>
+    </svg>
+  </a>
+  <p class="label" aria-live="polite"><span data-nav-label>Home</span></p>
+  <a class="cta" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 14px);
+    left: 50%;
+    translate: -50% 0;
+    z-index: 50;
+    width: min(calc(100vw - 32px), 460px);
+    display: grid;
+    /* Equal outer columns keep the label in the exact middle. */
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 9px;
+    border-radius: 10px;
+    background: rgba(15, 15, 12, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.45);
+    color: var(--paper);
+  }
+  .logo {
+    justify-self: start;
+    display: block;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+  }
+  .logo svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .label {
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .label span {
+    display: inline-block;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+  .label span.changing {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .cta {
+    justify-self: end;
+    background: var(--cyan);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .logo:focus-visible,
+  .cta:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+</style>
+
+<script>
+  // The centre label follows the section crossing the top of the screen.
+  const SECTIONS: [string, string][] = [
+    ['#hero', 'Home'],
+    ['.chase', 'Reminders'],
+    ['.add', 'Add it'],
+    ['.split', 'Split it'],
+    ['#settle', 'Settle it'],
+    ['.payback', 'Paying back'],
+    ['.groups', 'Every group'],
+    ['.trust', 'Trust'],
+    ['#ending', 'Join us'],
+  ];
+  const label = document.querySelector<HTMLElement>('[data-nav-label]')!;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 'Home';
+  const show = (text: string) => {
+    if (text === current) return;
+    current = text;
+    if (still) {
+      label.textContent = text;
+      return;
+    }
+    label.classList.add('changing');
+    setTimeout(() => {
+      label.textContent = text;
+      label.classList.remove('changing');
+    }, 180);
+  };
+  // The section whose top has passed a line just under the bar. Measured from each section's
+  // place in the page (the pinned hero is measured by its spacer), so it works while pinned.
+  const sections = SECTIONS.map(([selector, name]) => ({ el: document.querySelector<HTMLElement>(selector), name })).filter((s) => s.el);
+  const box = (el: HTMLElement) => (el.closest('.pin-spacer') ?? el).getBoundingClientRect();
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const line = window.innerHeight * 0.18;
+    let name = 'Home';
+    for (const s of sections) if (box(s.el!).top <= line) name = s.name;
+    // The ending is shorter than the screen, so at the very bottom it counts as reached.
+    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    if (atBottom) name = sections[sections.length - 1].name;
+    show(name);
+  };
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('load', update);
+  update();
+</script>
