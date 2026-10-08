@@ -1,0 +1,150 @@
+---
+import { LOGO_FULL, LOGO_SPLIT } from '../lib/logo-paths';
+import PhoneHome from './PhoneHome.astro';
+
+const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
+// Lines up the designer's split drawing ("tab") with the full letters slid together (same values as the app).
+const splitTransform = 'translate(85.5 -0.359) scale(0.9689)';
+---
+
+<section class="hero" id="hero" aria-label="taab">
+  <div class="stage">
+    <div class="phone-slot" data-hero-phone>
+      <PhoneHome />
+    </div>
+
+    <h1 class="wordmark" aria-label="taab">
+      <div class="part" data-hero-part="ta">
+      <svg data-hero-ta viewBox={viewBox} aria-hidden="true">
+        <path d={LOGO_FULL.t} fill-rule="evenodd"></path>
+        <path d={LOGO_FULL.firstA} fill-rule="evenodd"></path>
+      </svg>
+      </div>
+      <div class="part" data-hero-part="ab">
+      <svg data-hero-ab viewBox={viewBox} aria-hidden="true">
+        <path d={LOGO_FULL.secondA} fill-rule="evenodd"></path>
+        <path d={LOGO_FULL.b} fill-rule="evenodd"></path>
+      </svg>
+      </div>
+      <svg data-hero-tab viewBox={viewBox} aria-hidden="true">
+        <g transform={splitTransform}>
+          <path d={LOGO_SPLIT.t} fill-rule="evenodd"></path>
+          <path d={LOGO_SPLIT.a} fill-rule="evenodd"></path>
+          <path d={LOGO_SPLIT.b} fill-rule="evenodd"></path>
+        </g>
+      </svg>
+    </h1>
+
+    <div class="copy" data-hero-copy>
+      <p class="lead">taab does the awkward asking.</p>
+      <p class="sub">Split bills with friends, see who owes what, and get paid back without chasing anyone.</p>
+    </div>
+
+    <p class="tagline" data-hero-tagline>Add it. Split it. <em>Settle it.</em></p>
+    <p class="scroll-hint" data-hero-hint>Scroll</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100svh;
+  }
+  .stage {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .wordmark {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    width: min(86vw, 760px);
+    aspect-ratio: 605 / 214;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  /* Wrappers move on scroll; the letters inside move in the load intro. */
+  .part {
+    position: absolute;
+    inset: 0;
+  }
+  .wordmark svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: var(--ink);
+    overflow: visible;
+  }
+  /* Resting state before the intro runs (and without JavaScript): "taab". */
+  [data-hero-tab] {
+    opacity: 0;
+  }
+  .phone-slot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* Centred by the script (GSAP xPercent/yPercent: -50). */
+    z-index: 1;
+    opacity: 0;
+  }
+  .copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12svh;
+    padding-inline: var(--gutter);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 3;
+  }
+  .lead {
+    font-size: clamp(1.6rem, 6vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .sub {
+    color: var(--muted);
+    max-width: 34ch;
+    margin-inline: auto;
+  }
+  .tagline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6svh;
+    text-align: center;
+    font-size: clamp(1.3rem, 5vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    z-index: 3;
+  }
+  .tagline em {
+    font-style: normal;
+    background: var(--cyan);
+    padding: 0 0.2em;
+    border-radius: 0.2em;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 3svh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>
+
+<script>
+  import { initHero } from '../scripts/hero';
+  initHero();
+</script>

@@ -1,0 +1,63 @@
+---
+/** Why people can trust the record. All three are true of the app today. */
+const points = [
+  { title: 'Your money stays in your bank', text: 'taab keeps the record. Transfers happen in your own bank app, so taab never holds or moves money.' },
+  { title: 'Payments count once confirmed', text: 'When someone says they paid, the person who received it confirms. Until then, nothing changes.' },
+  { title: 'Every edit is visible', text: 'Change an amount and everyone in the taab can see what changed, who changed it and when.' },
+];
+---
+
+<section class="section trust" aria-labelledby="trust-title">
+  <div class="section-inner">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Trust</p>
+      <h2 id="trust-title">A record everyone agrees on.</h2>
+    </div>
+    <ol class="points">
+      {
+        points.map((p, i) => (
+          <li data-reveal style={`--d:${i * 90}ms`}>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .trust {
+    background: var(--canvas);
+  }
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 860px) {
+    .points {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .points li {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 4px solid var(--cyan);
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .points p {
+    color: var(--muted);
+  }
+</style>

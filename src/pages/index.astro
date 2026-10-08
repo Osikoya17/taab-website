@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import AddIt from '../components/AddIt.astro';
+import Chase from '../components/Chase.astro';
+import Ending from '../components/Ending.astro';
+import Groups from '../components/Groups.astro';
+import Hero from '../components/Hero.astro';
+import PayBack from '../components/PayBack.astro';
+import Slips from '../components/Slips.astro';
+import SplitIt from '../components/SplitIt.astro';
+import Trust from '../components/Trust.astro';
+
+const title = 'taab · Split bills with friends, without the awkward asking';
+const description = 'taab works out who owes what, reminds people for you and shows the fewest payments to settle up. For flatmates, trips, dinners and office contributions.';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#4ED2D4" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:title" content="taab" />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <main>
+      <Hero />
+      <Chase />
+      <AddIt />
+      <SplitIt />
+      <Slips />
+      <PayBack />
+      <Groups />
+      <Trust />
+      <Ending />
+    </main>
+    <script>
+      import { initReveal } from '../scripts/reveal';
+      initReveal();
+    </script>
+  </body>
+</html>

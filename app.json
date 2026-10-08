@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "taab website",
+    "slug": "taab-website",
+    "owner": "ranmi",
+    "extra": {
+      "eas": {
+        "projectId": "f2e1865d-0a93-4ae9-a69c-0b514397e27b"
+      }
+    }
+  }
+}

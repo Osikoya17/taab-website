@@ -1,0 +1,64 @@
+---
+/** Made for every group: the four scenarios, each in its own brand colour. */
+const groups = [
+  { name: 'Detty December', line: 'Beach clubs, Ubers and suya for six friends, settled before January.', colour: '#F4E04D', on: '#0F0F0C' },
+  { name: 'The Oduduwa Estate flat', line: 'Rent, light and the generator, split every month without the arguments.', colour: '#4ED2D4', on: '#0F0F0C' },
+  { name: 'Dinner at Red Horn', line: 'One person pays, everyone else pays them back. Done before dessert.', colour: '#FF4242', on: '#FFFEFA' },
+  { name: 'Office contributions', line: 'Birthday gifts, lunches and farewells, with a clear record of who gave.', colour: '#1859C3', on: '#FFFEFA' },
+];
+---
+
+<section class="section groups" aria-labelledby="groups-title">
+  <div class="section-inner">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Made for every group</p>
+      <h2 id="groups-title">Whoever you share with.</h2>
+    </div>
+    <ul class="grid">
+      {
+        groups.map((g, i) => (
+          <li data-reveal style={`--d:${i * 90}ms; background:${g.colour}; color:${g.on}`}>
+            <h3>{g.name}</h3>
+            <p>{g.line}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .groups {
+    background: var(--paper);
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .grid li {
+    border-radius: 24px;
+    padding: clamp(22px, 4vw, 32px);
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  h3 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+  }
+  .grid p {
+    max-width: 34ch;
+    opacity: 0.85;
+  }
+</style>

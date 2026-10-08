@@ -1,0 +1,165 @@
+---
+/** Add it: an expense in the Oduduwa Estate flat, and its edit history. */
+const people = [
+  { name: 'You', colour: '#4ED2D4', share: '₦6,000' },
+  { name: 'Gbayin', colour: '#1859C3', share: '₦6,000' },
+  { name: 'Macky', colour: '#F4E04D', share: '₦6,000' },
+  { name: 'Ini', colour: '#FF4242', share: '₦6,000' },
+];
+---
+
+<section class="section add" aria-labelledby="add-title">
+  <div class="section-inner split-layout">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Add it</p>
+      <h2 id="add-title">Add a bill in seconds.</h2>
+      <p class="lede">
+        Light, rent, the generator, food. Add what you paid, choose who it was for, and taab works out everyone’s share. In naira, dollars, pounds or euros.
+      </p>
+      <ul class="points">
+        <li>Split equally, by amount, by percentage or by shares</li>
+        <li>Repeat bills like rent every month</li>
+        <li>Every change is recorded, so nobody can quietly edit a bill</li>
+      </ul>
+    </div>
+
+    <div class="cards">
+      <div class="card expense" data-reveal>
+        <p class="taab-name"><i></i>Oduduwa Estate flat</p>
+        <p class="what">Light bill</p>
+        <p class="amount tabular">₦24,000</p>
+        <p class="meta">Paid by Gbayin · split equally between 4</p>
+        <ul>
+          {
+            people.map((p) => (
+              <li>
+                <span class="dot" style={`background:${p.colour}`} />
+                <span>{p.name}</span>
+                <b class="tabular">{p.share}</b>
+              </li>
+            ))
+          }
+        </ul>
+        <span class="save">Save expense</span>
+      </div>
+
+      <div class="card history" data-reveal style="--d: 200ms">
+        <p class="history-title">Edit history</p>
+        <p class="change"><b>Gbayin</b> changed the amount</p>
+        <p class="diff tabular"><s>₦20,000</s> → ₦24,000</p>
+        <p class="when">Yesterday at 8:14pm · everyone in the flat can see this</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .add {
+    background: var(--canvas);
+  }
+  .points {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cards {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .expense {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .taab-name {
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .taab-name i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+  .what {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 6px;
+  }
+  .amount {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .expense ul {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .expense li {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+  }
+  .save {
+    margin-top: 14px;
+    text-align: center;
+    padding: 14px;
+    border-radius: 16px;
+    background: var(--cyan);
+    font-weight: 600;
+  }
+  .history {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .history-title {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .change {
+    margin-top: 4px;
+  }
+  .diff {
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .diff s {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .when {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+</style>

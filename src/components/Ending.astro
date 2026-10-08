@@ -1,0 +1,101 @@
+---
+import { LOGO_FULL } from '../lib/logo-paths';
+
+/**
+ * The close: "ta" and "ab" come back together into "taab", then "Get notified".
+ * Until taab opens to everyone, the button goes to the interest survey, which
+ * ends by asking for an email or WhatsApp number to hear when it's ready.
+ */
+const NOTIFY_URL = 'https://forms.gle/GSLaeBjLYq3mveaz9';
+const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
+---
+
+<section class="ending" id="ending" aria-labelledby="ending-title">
+  <div class="mark" aria-hidden="true">
+    <svg data-end-ta viewBox={viewBox}>
+      <path d={LOGO_FULL.t} fill-rule="evenodd"></path>
+      <path d={LOGO_FULL.firstA} fill-rule="evenodd"></path>
+    </svg>
+    <svg data-end-ab viewBox={viewBox}>
+      <path d={LOGO_FULL.secondA} fill-rule="evenodd"></path>
+      <path d={LOGO_FULL.b} fill-rule="evenodd"></path>
+    </svg>
+  </div>
+  <h2 id="ending-title">Split it. Settle it. Stay friends.</h2>
+  <p class="lede">taab is in a small beta right now. Leave your details and we’ll tell you when it’s ready.</p>
+  <a class="cta" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
+
+  <footer>
+    <p>Questions? <a href="mailto:taabsupport@gmail.com">taabsupport@gmail.com</a></p>
+    <p>© 2026 taab · Made in Nigeria</p>
+  </footer>
+</section>
+
+<style>
+  .ending {
+    background: var(--cyan);
+    color: var(--ink);
+    padding-block: clamp(80px, 14vw, 160px) 32px;
+    padding-inline: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+  .mark {
+    position: relative;
+    width: min(70vw, 420px);
+    aspect-ratio: 605 / 214;
+    margin-bottom: 12px;
+  }
+  .mark svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: var(--ink);
+  }
+  h2 {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: 700;
+  }
+  .lede {
+    color: rgba(15, 15, 12, 0.72);
+    max-width: 40ch;
+  }
+  .cta {
+    margin-top: 8px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 16px 28px;
+    border-radius: 18px;
+  }
+  .cta:focus-visible {
+    outline: 3px solid var(--paper);
+    outline-offset: 3px;
+  }
+  footer {
+    margin-top: clamp(64px, 10vw, 120px);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9rem;
+    color: rgba(15, 15, 12, 0.7);
+  }
+  footer a {
+    color: inherit;
+  }
+</style>
+
+<script>
+  import { gsap, reducedMotion } from '../scripts/motion';
+
+  // "ta" and "ab" come back together as the ending scrolls into view.
+  if (!reducedMotion) {
+    gsap.fromTo('[data-end-ta]', { xPercent: -18 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: '#ending', start: 'top 85%', end: 'top 35%', scrub: 0.5 } });
+    gsap.fromTo('[data-end-ab]', { xPercent: 18 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: '#ending', start: 'top 85%', end: 'top 35%', scrub: 0.5 } });
+  }
+</script>

@@ -1,0 +1,219 @@
+---
+/** A phone showing taab's Home screen, drawn in HTML so it stays sharp and light. */
+const taabs = [
+  { name: 'Detty December', people: 6, note: 'You’re owed ₦28,000', tone: 'owed', colours: ['#4ED2D4', '#1859C3', '#F4E04D'] },
+  { name: 'Oduduwa Estate flat', people: 4, note: 'You owe ₦4,500', tone: 'owe', colours: ['#029950', '#4ED2D4', '#FF4242'] },
+  { name: 'Red Horn dinner', people: 5, note: 'All settled', tone: 'muted', colours: ['#F4E04D', '#1859C3', '#029950'] },
+];
+---
+
+<div class="phone" aria-label="taab's Home screen">
+  <div class="screen">
+    <div class="status"><span>9:41</span><span class="dots">●●●</span></div>
+    <p class="hello">Good evening,<br /><b>Ranmi</b></p>
+    <div class="balance">
+      <span class="label"><i></i>Your balance</span>
+      <span class="amount tabular">+₦23,500</span>
+      <span class="caption">You’re owed overall</span>
+    </div>
+    <div class="split-cards">
+      <div><span>You are owed</span><b class="owed tabular">₦28,000</b></div>
+      <div><span>You owe</span><b class="owe tabular">₦4,500</b></div>
+    </div>
+    <div class="actions">
+      <span class="primary">+ Add expense</span>
+      <span class="secondary">Settle up</span>
+    </div>
+    <p class="recent-title">Recent taabs</p>
+    <ul class="taabs">
+      {
+        taabs.map((t) => (
+          <li>
+            <div class="row">
+              <b>{t.name}</b>
+              <span class="avatars">
+                {t.colours.map((c) => (
+                  <i style={`background:${c}`} />
+                ))}
+              </span>
+            </div>
+            <span class="meta">{t.people} people</span>
+            <span class={`note ${t.tone}`}>{t.note}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .phone {
+    /* Fits the width and the height, leaving room for the line under it in the hero. */
+    --w: min(300px, 74vw, calc((86svh - 9rem) * 300 / 620));
+    width: var(--w);
+    aspect-ratio: 300 / 620;
+    border-radius: calc(var(--w) * 0.15);
+    background: var(--ink);
+    padding: calc(var(--w) * 0.035);
+    box-shadow:
+      0 40px 80px -30px rgba(15, 15, 12, 0.45),
+      0 0 0 1px rgba(15, 15, 12, 0.06);
+  }
+  .screen {
+    height: 100%;
+    border-radius: calc(var(--w) * 0.12);
+    background: var(--canvas);
+    overflow: hidden;
+    padding: calc(var(--w) * 0.06) calc(var(--w) * 0.06) 0;
+    font-size: calc(var(--w) * 0.042);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--w) * 0.035);
+  }
+  .status {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+  .dots {
+    letter-spacing: 0.1em;
+    font-size: 0.6em;
+  }
+  .hello {
+    color: var(--muted);
+    line-height: 1.25;
+  }
+  .hello b {
+    color: var(--ink);
+    font-size: 1.25em;
+  }
+  .balance {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .label {
+    color: var(--muted);
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .label i {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+  .amount {
+    font-size: 2.3em;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--owed);
+    line-height: 1.1;
+  }
+  .caption {
+    color: var(--muted);
+    font-size: 0.85em;
+  }
+  .split-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1em;
+  }
+  .split-cards div {
+    padding: 0.6em 0.8em;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8em;
+    color: var(--muted);
+  }
+  .split-cards div + div {
+    border-left: 1px solid var(--line);
+  }
+  .split-cards b {
+    font-size: 1.35em;
+  }
+  .owed {
+    color: var(--owed);
+  }
+  .owe {
+    color: var(--owe);
+  }
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+  .actions span {
+    text-align: center;
+    padding: 0.8em 0;
+    border-radius: 1em;
+  }
+  .primary {
+    background: var(--cyan);
+    color: var(--ink);
+  }
+  .secondary {
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+  .recent-title {
+    font-weight: 600;
+    margin-top: 0.3em;
+  }
+  .taabs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  .taabs li {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1em;
+    padding: 0.7em 0.8em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .avatars {
+    display: flex;
+  }
+  .avatars i {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -0.35em;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.8em;
+  }
+  .note {
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .note.owed {
+    color: var(--owed);
+  }
+  .note.owe {
+    color: var(--owe);
+  }
+  .note.muted {
+    color: var(--muted);
+  }
+</style>

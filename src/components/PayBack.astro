@@ -1,0 +1,171 @@
+---
+/** Settle it, part two: paying back from your own bank, and the receiver confirming it. */
+const banks = [
+  { name: 'OPay', tag: 'Your bank', colour: '#029950' },
+  { name: 'GTWorld', tag: 'Same bank as Ranmi', colour: '#FF4242' },
+  { name: 'Kuda', tag: '', colour: '#1859C3' },
+  { name: 'Moniepoint', tag: '', colour: '#4ED2D4' },
+];
+---
+
+<section class="section payback" aria-labelledby="payback-title">
+  <div class="section-inner">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Settle it</p>
+      <h2 id="payback-title">Pay back in two taps. From your own bank.</h2>
+      <p class="lede">
+        Tap Transfer now and taab copies the account number, then opens the bank app you choose. taab never holds or moves your money.
+      </p>
+    </div>
+
+    <div class="pair">
+      <div class="card sheet" data-reveal>
+        <p class="sheet-title">Transfer with…</p>
+        <p class="sheet-sub">Account number copied. Paste it in your bank app to pay Ranmi.</p>
+        <ul>
+          {
+            banks.map((b) => (
+              <li>
+                <span class="tile" style={`background:${b.colour}`} aria-hidden="true">
+                  {b.name.slice(0, 1)}
+                </span>
+                <span class="bank">
+                  <b>{b.name}</b>
+                  {b.tag ? <small>{b.tag}</small> : null}
+                </span>
+                <span class="chev" aria-hidden="true">›</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="card confirm" data-reveal style="--d: 180ms">
+        <p class="confirm-who"><span class="avatar" aria-hidden="true">M</span>Macky says they paid you</p>
+        <p class="confirm-amount tabular">₦8,000</p>
+        <p class="confirm-meta">Detty December · Bank transfer</p>
+        <div class="buttons">
+          <span class="secondary">Not received</span>
+          <span class="primary">Yes, I got it</span>
+        </div>
+        <p class="confirm-note">Balances only change once you confirm, so nobody can mark a payment as made when it wasn’t.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .payback {
+    background: var(--canvas);
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (min-width: 860px) {
+    .pair {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .sheet,
+  .confirm {
+    padding: 20px;
+    width: 100%;
+    max-width: 440px;
+    justify-self: center;
+  }
+  .sheet-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .sheet-sub {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-top: 2px;
+  }
+  .sheet ul {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+  }
+  .sheet li {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tile {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 700;
+  }
+  .bank {
+    display: flex;
+    flex-direction: column;
+  }
+  .bank small {
+    color: var(--muted);
+  }
+  .chev {
+    color: var(--muted);
+    font-size: 1.3rem;
+  }
+  .confirm-who {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fbf5cc;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .confirm-amount {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-top: 10px;
+    line-height: 1.1;
+  }
+  .confirm-meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+    font-weight: 600;
+  }
+  .buttons span {
+    text-align: center;
+    padding: 13px;
+    border-radius: 16px;
+  }
+  .primary {
+    background: var(--cyan);
+  }
+  .secondary {
+    border: 1px solid var(--line);
+  }
+  .confirm-note {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

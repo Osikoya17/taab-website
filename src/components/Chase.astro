@@ -1,0 +1,157 @@
+---
+/** The awkward chase, and taab doing the asking instead. */
+const chat = [
+  { me: true, text: 'Abeg, that Detty December money 🙏🏾', time: 'Mon 10:12' },
+  { me: false, text: 'Ah, I go send am later o', time: 'Mon 10:40' },
+  { me: true, text: 'No wahala', time: 'Mon 10:41' },
+  { me: true, text: 'Hello? It’s been two weeks 😅', time: 'Mon, 2 weeks later' },
+];
+---
+
+<section class="section chase" aria-labelledby="chase-title">
+  <div class="section-inner split-layout">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Reminders</p>
+      <h2 id="chase-title">taab does the awkward asking.</h2>
+      <p class="lede">
+        Nobody likes chasing friends for money. taab sends a friendly reminder for you, and lets them know exactly what they owe and where to pay it.
+      </p>
+      <p class="stat"><b class="tabular">84%</b> of people we asked want reminders more than anything else.</p>
+    </div>
+
+    <div class="scene">
+      <div class="chat card" data-reveal>
+        <p class="chat-name">Macky</p>
+        <ul>
+          {
+            chat.map((m, i) => (
+              <li class={m.me ? 'me' : 'them'} data-reveal style={`--d: ${150 + i * 140}ms`}>
+                <span>{m.text}</span>
+                <small>{m.time}</small>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="reminder" data-reveal style="--d: 750ms" role="img" aria-label="A taab reminder notification to Macky">
+        <span class="app-icon" aria-hidden="true">tab</span>
+        <div>
+          <p class="from">taab · now</p>
+          <p class="title">Friendly reminder from Ranmi</p>
+          <p class="body">You owe ₦8,000 for Detty December. Tap to see the details and pay.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chase {
+    background: var(--paper);
+  }
+  .stat {
+    color: var(--ink);
+    font-size: 1rem;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    max-width: 40ch;
+  }
+  .stat b {
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+    margin-right: 4px;
+  }
+  .scene {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
+    padding-bottom: 72px;
+  }
+  .chat {
+    padding: 18px 16px 22px;
+    background: #efeae2;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chat-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--muted);
+  }
+  .chat ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .chat li {
+    max-width: 80%;
+    padding: 8px 12px 6px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+  }
+  .chat small {
+    font-size: 0.7rem;
+    color: var(--muted);
+    align-self: flex-end;
+  }
+  .me {
+    align-self: flex-end;
+    background: #d9fdd3;
+  }
+  .them {
+    align-self: flex-start;
+    background: #fff;
+  }
+  .reminder {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(100%, 380px);
+    translate: -50% 0;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 20px;
+    background: rgba(255, 254, 250, 0.92);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 24px 50px -20px rgba(15, 15, 12, 0.35),
+      0 0 0 1px rgba(15, 15, 12, 0.06);
+  }
+  .app-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--cyan);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: -0.04em;
+  }
+  .from {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .title {
+    font-weight: 600;
+  }
+  .body {
+    font-size: 0.92rem;
+    color: #3a3a36;
+  }
+</style>

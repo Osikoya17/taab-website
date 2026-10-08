@@ -1,0 +1,162 @@
+---
+import RedHornSplit from './RedHornSplit';
+---
+
+<section class="section split" aria-labelledby="split-title">
+  <div class="section-inner split-layout">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Split it</p>
+      <h2 id="split-title">Try it: dinner at Red Horn.</h2>
+      <p class="lede">
+        Tap who was there and choose how to split. These are taab’s real numbers, worked out the same way the app does it.
+      </p>
+      <p class="note">In the app you can also split by exact amounts or by percentages.</p>
+    </div>
+    <div class="demo" data-reveal style="--d: 150ms">
+      <RedHornSplit client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    background: var(--paper);
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .demo {
+    width: 100%;
+    max-width: 440px;
+    justify-self: center;
+  }
+  /* The island's markup (RedHornSplit.tsx) */
+  .demo :global(.rh) {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 30px 60px -40px rgba(15, 15, 12, 0.35);
+  }
+  .demo :global(.rh-head) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .demo :global(.rh-taab) {
+    font-weight: 600;
+  }
+  .demo :global(.rh-total) {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .demo :global(.rh-meta),
+  .demo :global(.rh-label) {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .demo :global(.rh-methods) {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 14px;
+    background: var(--canvas);
+  }
+  .demo :global(button) {
+    font: inherit;
+    color: inherit;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .demo :global(.rh-methods button) {
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .demo :global(.rh-methods button.on) {
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  .demo :global(.rh-chips) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .demo :global(.chip) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .demo :global(.chip.on) {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .demo :global(.dot) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .demo :global(.dot.big) {
+    width: 22px;
+    height: 22px;
+  }
+  .demo :global(.rh-rows) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .demo :global(.rh-rows li) {
+    display: grid;
+    grid-template-columns: 22px 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .demo :global(.rh-rows b) {
+    grid-column: 4;
+    font-size: 1.05rem;
+  }
+  .demo :global(.stepper) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+  .demo :global(.stepper button) {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--canvas);
+    font-size: 1rem;
+  }
+  .demo :global(.rh-check) {
+    font-size: 0.9rem;
+    color: var(--owed);
+  }
+  .demo :global(button:focus-visible) {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+</style>
