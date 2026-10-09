@@ -48,11 +48,9 @@ export function initHero() {
   };
 
   if (reducedMotion) {
-    // Final, still layout: the phone between "ta" and "ab".
-    gsap.set(taPart, { x: parted().ta });
-    gsap.set(abPart, { x: parted().ab });
-    gsap.set(phone, { opacity: 1, scale: 1, xPercent: -50, yPercent: -50 });
-    gsap.set(tagline, { opacity: 1 });
+    // A still layout in reading order (see .hero.still in Hero.astro): "taab", the intro,
+    // the app, then the tagline. Nothing overlaps, so nothing has to move out of the way.
+    q<HTMLElement>('#hero').classList.add('still');
     return;
   }
 

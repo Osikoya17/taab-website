@@ -142,6 +142,45 @@ const splitTransform = 'translate(85.5 -0.359) scale(0.9689)';
     text-transform: uppercase;
     color: var(--body);
   }
+
+  /* Reduced motion (set by scripts/hero.ts): everything stacked in reading order, nothing pinned. */
+  .hero.still,
+  .hero.still .stage {
+    height: auto;
+  }
+  .hero.still .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    overflow: visible;
+    padding: calc(env(safe-area-inset-top, 0px) + 96px) var(--gutter) clamp(56px, 10vw, 96px);
+  }
+  .hero.still .wordmark,
+  .hero.still .copy,
+  .hero.still .phone-slot,
+  .hero.still .tagline {
+    position: relative;
+    inset: auto;
+    transform: none;
+    opacity: 1;
+  }
+  .hero.still .wordmark {
+    order: 1;
+  }
+  .hero.still .copy {
+    order: 2;
+    padding-inline: 0;
+  }
+  .hero.still .phone-slot {
+    order: 3;
+  }
+  .hero.still .tagline {
+    order: 4;
+  }
+  .hero.still .scroll-hint {
+    display: none;
+  }
 </style>
 
 <script>
