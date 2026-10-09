@@ -1,10 +1,10 @@
 ---
-/** Made for every group: the four scenarios, each in its own brand colour. */
+/** Made for every group: the four scenarios, each on its own soft colour with charcoal text. */
 const groups = [
-  { name: 'Detty December', line: 'Beach clubs, Ubers and suya for six friends, settled before January.', colour: '#F4E04D', on: '#0F0F0C' },
-  { name: 'The Oduduwa Estate flat', line: 'Rent, light and the generator, split every month without the arguments.', colour: '#4ED2D4', on: '#0F0F0C' },
-  { name: 'Dinner at Red Horn', line: 'One person pays, everyone else pays them back. Done before dessert.', colour: '#FF4242', on: '#FFFEFA' },
-  { name: 'Office contributions', line: 'Birthday gifts, lunches and farewells, with a clear record of who gave.', colour: '#1859C3', on: '#FFFEFA' },
+  { name: 'Detty December', line: 'Beach clubs, Ubers and suya for six friends, settled before January.', colour: 'var(--sun)' },
+  { name: 'The Oduduwa Estate flat', line: 'Rent, light and the generator, split every month without the arguments.', colour: 'var(--mint)' },
+  { name: 'Dinner at Red Horn', line: 'One person pays, everyone else pays them back. Done before dessert.', colour: 'var(--peach)' },
+  { name: 'Office contributions', line: 'Birthday gifts, lunches and farewells, with a clear record of who gave.', colour: 'var(--sky)' },
 ];
 ---
 
@@ -17,7 +17,7 @@ const groups = [
     <ul class="grid">
       {
         groups.map((g, i) => (
-          <li data-reveal style={`--d:${i * 90}ms; background:${g.colour}; color:${g.on}`}>
+          <li data-reveal style={`--d:${i * 90}ms; background:${g.colour}`}>
             <h3>{g.name}</h3>
             <p>{g.line}</p>
           </li>
@@ -29,7 +29,7 @@ const groups = [
 
 <style>
   .groups {
-    background: var(--paper);
+    background: var(--cream);
   }
   .grid {
     list-style: none;
@@ -52,6 +52,8 @@ const groups = [
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
+    color: var(--charcoal);
+    border: 1px solid rgb(var(--shadow) / 0.06);
   }
   h3 {
     font-size: clamp(1.5rem, 4vw, 2rem);
@@ -59,6 +61,6 @@ const groups = [
   }
   .grid p {
     max-width: 34ch;
-    opacity: 0.85;
+    color: var(--body);
   }
 </style>

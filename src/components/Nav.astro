@@ -1,15 +1,16 @@
 ---
 import { NOTIFY_URL } from '../lib/links';
-import { LOGO_SPLIT } from '../lib/logo-paths';
+import { LOGO_FULL } from '../lib/logo-paths';
 
 /**
- * A compact dark bar floating at the top: the cyan app icon, the name of the
+ * A compact charcoal bar floating at the top: the turquoise app icon, the name of the
  * section you're reading, and "Get notified".
  */
-const W = 448;
-const H = 223;
+// The full "taab" on turquoise, the same as the app icon.
+const W = LOGO_FULL.width;
+const H = LOGO_FULL.height;
 const size = 1024;
-const scale = (size * 0.62) / W;
+const scale = (size * 0.72) / W;
 const dx = (size - W * scale) / 2;
 const dy = (size - H * scale) / 2;
 ---
@@ -17,16 +18,17 @@ const dy = (size - H * scale) / 2;
 <header class="nav">
   <a class="logo" href="#hero" aria-label="taab, back to the top">
     <svg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
-      <rect width={size} height={size} rx="230" fill="#4ED2D4"></rect>
-      <g transform={`translate(${dx} ${dy}) scale(${scale})`} fill="#0F0F0C">
-        <path d={LOGO_SPLIT.t} fill-rule="evenodd"></path>
-        <path d={LOGO_SPLIT.a} fill-rule="evenodd"></path>
-        <path d={LOGO_SPLIT.b} fill-rule="evenodd"></path>
+      <rect class="logo-bg" width={size} height={size} rx="230"></rect>
+      <g transform={`translate(${dx} ${dy}) scale(${scale})`} class="logo-mark">
+        <path d={LOGO_FULL.t} fill-rule="evenodd"></path>
+        <path d={LOGO_FULL.firstA} fill-rule="evenodd"></path>
+        <path d={LOGO_FULL.secondA} fill-rule="evenodd"></path>
+        <path d={LOGO_FULL.b} fill-rule="evenodd"></path>
       </g>
     </svg>
   </a>
   <p class="label" aria-live="polite"><span data-nav-label>Home</span></p>
-  <a class="cta" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
+  <a class="cta button-primary" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
 </header>
 
 <style>
@@ -44,11 +46,12 @@ const dy = (size - H * scale) / 2;
     gap: 12px;
     padding: 9px;
     border-radius: 10px;
-    background: rgba(15, 15, 12, 0.86);
+    --focus: var(--turquoise);
+    background: rgb(var(--shadow) / 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.45);
-    color: var(--paper);
+    box-shadow: 0 12px 30px -12px rgb(var(--shadow) / 0.45);
+    color: var(--on-dark);
   }
   .logo {
     justify-self: start;
@@ -56,6 +59,12 @@ const dy = (size - H * scale) / 2;
     width: 34px;
     height: 34px;
     border-radius: 8px;
+  }
+  .logo-bg {
+    fill: var(--turquoise);
+  }
+  .logo-mark {
+    fill: var(--charcoal);
   }
   .logo svg {
     width: 100%;
@@ -83,19 +92,10 @@ const dy = (size - H * scale) / 2;
   }
   .cta {
     justify-self: end;
-    background: var(--cyan);
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: 600;
     font-size: 0.85rem;
     padding: 8px 12px;
     border-radius: 8px;
     white-space: nowrap;
-  }
-  .logo:focus-visible,
-  .cta:focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 3px;
   }
 </style>
 
@@ -110,6 +110,7 @@ const dy = (size - H * scale) / 2;
     ['.payback', 'Paying back'],
     ['.groups', 'Every group'],
     ['.trust', 'Trust'],
+    ['.coming', 'Coming next'],
     ['#ending', 'Join us'],
   ];
   const label = document.querySelector<HTMLElement>('[data-nav-label]')!;

@@ -20,10 +20,10 @@ import RedHornSplit from './RedHornSplit';
 
 <style>
   .split {
-    background: var(--paper);
+    background: var(--cream);
   }
   .note {
-    color: var(--muted);
+    color: var(--body);
     font-size: 0.95rem;
   }
   .demo {
@@ -33,14 +33,14 @@ import RedHornSplit from './RedHornSplit';
   }
   /* The island's markup (RedHornSplit.tsx) */
   .demo :global(.rh) {
-    background: #fff;
-    border: 1px solid var(--line);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    box-shadow: 0 30px 60px -40px rgba(15, 15, 12, 0.35);
+    box-shadow: 0 30px 60px -40px rgb(var(--shadow) / 0.35);
   }
   .demo :global(.rh-head) {
     display: flex;
@@ -61,15 +61,8 @@ import RedHornSplit from './RedHornSplit';
   }
   .demo :global(.rh-meta),
   .demo :global(.rh-label) {
-    color: var(--muted);
+    color: var(--body);
     font-size: 0.9rem;
-  }
-  .demo :global(.rh-methods) {
-    display: flex;
-    gap: 4px;
-    padding: 4px;
-    border-radius: 14px;
-    background: var(--canvas);
   }
   .demo :global(button) {
     font: inherit;
@@ -77,19 +70,39 @@ import RedHornSplit from './RedHornSplit';
     border: 0;
     background: none;
     cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  /* How to split: a mint track; the chosen method is turquoise with charcoal text and a charcoal edge. */
+  .demo :global(.rh-methods) {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 14px;
+    background: var(--mint);
   }
   .demo :global(.rh-methods button) {
     padding: 8px 12px;
     border-radius: 10px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--muted);
+    color: var(--body);
   }
   .demo :global(.rh-methods button.on) {
-    background: #fff;
-    color: var(--ink);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    background: var(--turquoise);
+    color: var(--charcoal);
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1.5px var(--charcoal);
   }
+  .demo :global(.rh-methods button:not(.on):active) {
+    background: var(--mint-pressed);
+    color: var(--charcoal);
+  }
+
+  /* Who was there: chosen people are turquoise with a charcoal edge. */
   .demo :global(.rh-chips) {
     display: flex;
     flex-wrap: wrap;
@@ -101,20 +114,30 @@ import RedHornSplit from './RedHornSplit';
     gap: 6px;
     padding: 8px 12px;
     border-radius: 999px;
-    border: 1px solid var(--line);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
     font-size: 0.9rem;
-    color: var(--muted);
+    color: var(--body);
   }
   .demo :global(.chip.on) {
-    border-color: var(--ink);
-    background: var(--ink);
-    color: var(--paper);
+    border-color: var(--charcoal);
+    background: var(--turquoise);
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+  .demo :global(.chip:not(.on):active) {
+    background: var(--mint);
+    color: var(--charcoal);
+  }
+  .demo :global(.chip.on:active) {
+    background: var(--turquoise-pressed);
   }
   .demo :global(.dot) {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     display: inline-block;
+    box-shadow: 0 0 0 1px rgb(var(--shadow) / 0.15);
   }
   .demo :global(.dot.big) {
     width: 22px;
@@ -131,13 +154,15 @@ import RedHornSplit from './RedHornSplit';
     align-items: center;
     gap: 10px;
     padding: 10px 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--border);
     overflow: hidden;
   }
   .demo :global(.rh-rows b) {
     grid-column: 4;
     font-size: 1.05rem;
   }
+
+  /* Share steppers: mint buttons; at 1 or 5 shares the button is marked unavailable (still focusable), with its own readable colours. */
   .demo :global(.stepper) {
     display: inline-flex;
     align-items: center;
@@ -148,15 +173,42 @@ import RedHornSplit from './RedHornSplit';
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    background: var(--canvas);
+    background: var(--mint);
+    color: var(--charcoal);
     font-size: 1rem;
   }
+  .demo :global(.stepper button:not([aria-disabled="true"]):active) {
+    background: var(--mint-pressed);
+  }
+  .demo :global(.stepper button[aria-disabled="true"]) {
+    background: var(--disabled-bg);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    .demo :global(.rh-methods button:not(.on):hover) {
+      background: var(--mint-hover);
+      color: var(--charcoal);
+    }
+    .demo :global(.chip:not(.on):hover) {
+      border-color: var(--border-strong);
+      color: var(--charcoal);
+    }
+    .demo :global(.chip.on:hover) {
+      background: var(--turquoise-hover);
+    }
+    .demo :global(.stepper button:not([aria-disabled="true"]):hover) {
+      background: var(--mint-hover);
+    }
+  }
+
   .demo :global(.rh-check) {
     font-size: 0.9rem;
     color: var(--owed);
   }
   .demo :global(button:focus-visible) {
-    outline: 2px solid var(--blue);
+    outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
 </style>

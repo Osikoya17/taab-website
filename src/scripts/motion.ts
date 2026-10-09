@@ -12,7 +12,8 @@ let started = false;
 export function startSmoothScroll() {
   if (started || reducedMotion) return;
   started = true;
-  const lenis = new Lenis({ lerp: 0.12 });
+  // anchors: links such as the top bar's logo (#hero) scroll there smoothly instead of being fought.
+  const lenis = new Lenis({ lerp: 0.12, anchors: true });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);

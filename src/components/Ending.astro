@@ -23,7 +23,7 @@ const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
   </div>
   <h2 id="ending-title">Split it. Settle it. Stay friends.</h2>
   <p class="lede">taab is in a small beta right now. Leave your details and we’ll tell you when it’s ready.</p>
-  <a class="cta" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
+  <a class="cta button-primary" href={NOTIFY_URL} target="_blank" rel="noopener">Get notified</a>
 
   <footer>
     <p>Questions? <a href="mailto:taabsupport@gmail.com">taabsupport@gmail.com</a></p>
@@ -32,9 +32,10 @@ const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
 </section>
 
 <style>
+  /* Pale mint, so the turquoise button stands out as the one thing to do. */
   .ending {
-    background: var(--cyan);
-    color: var(--ink);
+    background: var(--mint);
+    color: var(--charcoal);
     padding-block: clamp(80px, 14vw, 160px) 32px;
     padding-inline: var(--gutter);
     display: flex;
@@ -54,28 +55,21 @@ const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
     inset: 0;
     width: 100%;
     height: 100%;
-    fill: var(--ink);
+    fill: var(--charcoal);
   }
   h2 {
     font-size: clamp(1.8rem, 6vw, 3rem);
     font-weight: 700;
   }
   .lede {
-    color: rgba(15, 15, 12, 0.72);
+    color: var(--body);
     max-width: 40ch;
   }
   .cta {
     margin-top: 8px;
-    background: var(--ink);
-    color: var(--paper);
-    text-decoration: none;
-    font-weight: 600;
     padding: 16px 28px;
     border-radius: 18px;
-  }
-  .cta:focus-visible {
-    outline: 3px solid var(--paper);
-    outline-offset: 3px;
+    box-shadow: 0 14px 30px -18px rgb(var(--shadow) / 0.5);
   }
   footer {
     margin-top: clamp(64px, 10vw, 120px);
@@ -83,10 +77,16 @@ const viewBox = `0 0 ${LOGO_FULL.width} ${LOGO_FULL.height}`;
     flex-direction: column;
     gap: 4px;
     font-size: 0.9rem;
-    color: rgba(15, 15, 12, 0.7);
+    color: var(--body);
   }
   footer a {
-    color: inherit;
+    color: var(--charcoal);
+    text-underline-offset: 3px;
+  }
+  @media (hover: hover) {
+    footer a:hover {
+      color: var(--turquoise-ink);
+    }
   }
 </style>
 

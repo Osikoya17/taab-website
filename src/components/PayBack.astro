@@ -1,10 +1,13 @@
 ---
-/** Settle it, part two: paying back from your own bank, and the receiver confirming it. */
+/**
+ * Settle it, part two: paying back from your own bank, and the receiver confirming it.
+ * Tiles keep each bank's own colour; the initial uses whichever of white or charcoal reads best on it.
+ */
 const banks = [
-  { name: 'OPay', tag: 'Your bank', colour: '#029950' },
-  { name: 'GTWorld', tag: 'Same bank as Ranmi', colour: '#FF4242' },
-  { name: 'Kuda', tag: '', colour: '#1859C3' },
-  { name: 'Moniepoint', tag: '', colour: '#4ED2D4' },
+  { name: 'OPay', tag: 'Your bank', colour: '#029950', on: '#FFFFFF' },
+  { name: 'GTWorld', tag: 'Same bank as Ranmi', colour: '#FF4242', on: '#20231F' },
+  { name: 'Kuda', tag: '', colour: '#1859C3', on: '#FFFFFF' },
+  { name: 'Moniepoint', tag: '', colour: '#49CBCD', on: '#20231F' },
 ];
 ---
 
@@ -26,7 +29,7 @@ const banks = [
           {
             banks.map((b) => (
               <li>
-                <span class="tile" style={`background:${b.colour}`} aria-hidden="true">
+                <span class="tile" style={`background:${b.colour}; color:${b.on}`} aria-hidden="true">
                   {b.name.slice(0, 1)}
                 </span>
                 <span class="bank">
@@ -56,7 +59,7 @@ const banks = [
 
 <style>
   .payback {
-    background: var(--canvas);
+    background: var(--cream-deep);
   }
   .pair {
     display: grid;
@@ -81,7 +84,7 @@ const banks = [
     font-size: 1.2rem;
   }
   .sheet-sub {
-    color: var(--muted);
+    color: var(--body);
     font-size: 0.92rem;
     margin-top: 2px;
   }
@@ -96,7 +99,7 @@ const banks = [
     align-items: center;
     gap: 12px;
     padding: 10px 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--border);
   }
   .tile {
     width: 40px;
@@ -104,7 +107,8 @@ const banks = [
     border-radius: 10px;
     display: grid;
     place-items: center;
-    color: #fff;
+    /* Large bold initials (AA large text) */
+    font-size: 1.2rem;
     font-weight: 700;
   }
   .bank {
@@ -112,10 +116,10 @@ const banks = [
     flex-direction: column;
   }
   .bank small {
-    color: var(--muted);
+    color: var(--body);
   }
   .chev {
-    color: var(--muted);
+    color: var(--body);
     font-size: 1.3rem;
   }
   .confirm-who {
@@ -128,7 +132,7 @@ const banks = [
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #fbf5cc;
+    background: var(--sun);
     display: grid;
     place-items: center;
     font-weight: 600;
@@ -142,7 +146,7 @@ const banks = [
     line-height: 1.1;
   }
   .confirm-meta {
-    color: var(--muted);
+    color: var(--body);
     font-size: 0.92rem;
   }
   .buttons {
@@ -158,14 +162,16 @@ const banks = [
     border-radius: 16px;
   }
   .primary {
-    background: var(--cyan);
+    background: var(--turquoise);
+    color: var(--charcoal);
   }
   .secondary {
-    border: 1px solid var(--line);
+    background: var(--surface);
+    border: 1px solid var(--border);
   }
   .confirm-note {
     margin-top: 14px;
     font-size: 0.9rem;
-    color: var(--muted);
+    color: var(--body);
   }
 </style>

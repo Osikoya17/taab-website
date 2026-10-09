@@ -4,8 +4,10 @@ import { useMemo, useState } from 'react';
 import { allocateProportionally, formatNaira } from '../lib/split';
 
 const TOTAL = 5_000_000; // ₦50,000 in kobo
+const MIN_SHARES = 1;
+const MAX_SHARES = 5;
 const FRIENDS = [
-  { id: 'you', name: 'You', colour: '#4ED2D4' },
+  { id: 'you', name: 'You', colour: '#49CBCD' },
   { id: 'gbayin', name: 'Gbayin', colour: '#1859C3' },
   { id: 'macky', name: 'Macky', colour: '#F4E04D' },
   { id: 'ini', name: 'Ini', colour: '#FF4242' },
@@ -29,7 +31,7 @@ export default function RedHornSplit() {
 
   const toggle = (id: string) =>
     setIn((ids) => (ids.includes(id) ? (ids.length > 1 ? ids.filter((x) => x !== id) : ids) : FRIENDS.map((f) => f.id).filter((x) => x === id || ids.includes(x))));
-  const step = (id: string, by: number) => setShares((s) => ({ ...s, [id]: Math.min(5, Math.max(1, s[id] + by)) }));
+  const step = (id: string, by: number) => setShares((s) => ({ ...s, [id]: Math.min(MAX_SHARES, Math.max(MIN_SHARES, s[id] + by)) }));
 
   return (
     <div className="rh">
@@ -69,11 +71,11 @@ export default function RedHornSplit() {
               <span className="name">{p.name}</span>
               {method === 'shares' ? (
                 <span className="stepper">
-                  <button type="button" aria-label={`Fewer shares for ${p.name}`} onClick={() => step(p.id, -1)}>
+                  <button type="button" aria-label={`Fewer shares for ${p.name}`} aria-disabled={shares[p.id] <= MIN_SHARES} onClick={() => step(p.id, -1)}>
                     −
                   </button>
                   <span className="tabular">{shares[p.id]}</span>
-                  <button type="button" aria-label={`More shares for ${p.name}`} onClick={() => step(p.id, 1)}>
+                  <button type="button" aria-label={`More shares for ${p.name}`} aria-disabled={shares[p.id] >= MAX_SHARES} onClick={() => step(p.id, 1)}>
                     +
                   </button>
                 </span>

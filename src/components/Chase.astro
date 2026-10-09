@@ -35,7 +35,7 @@ const chat = [
       </div>
 
       <div class="reminder" data-reveal style="--d: 750ms" role="img" aria-label="A taab reminder notification to Macky">
-        <span class="app-icon" aria-hidden="true">tab</span>
+        <span class="app-icon" aria-hidden="true">taab</span>
         <div>
           <p class="from">taab · now</p>
           <p class="title">Friendly reminder from Ranmi</p>
@@ -48,13 +48,13 @@ const chat = [
 
 <style>
   .chase {
-    background: var(--paper);
+    background: var(--cream);
   }
   .stat {
-    color: var(--ink);
+    color: var(--charcoal);
     font-size: 1rem;
     padding-top: 8px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--border);
     max-width: 40ch;
   }
   .stat b {
@@ -81,7 +81,7 @@ const chat = [
     font-weight: 600;
     font-size: 0.95rem;
     text-align: center;
-    color: var(--muted);
+    color: var(--body);
   }
   .chat ul {
     list-style: none;
@@ -103,7 +103,7 @@ const chat = [
   }
   .chat small {
     font-size: 0.7rem;
-    color: var(--muted);
+    color: var(--body);
     align-self: flex-end;
   }
   .me {
@@ -112,7 +112,7 @@ const chat = [
   }
   .them {
     align-self: flex-start;
-    background: #fff;
+    background: var(--surface);
   }
   .reminder {
     position: absolute;
@@ -125,33 +125,33 @@ const chat = [
     gap: 12px;
     padding: 14px;
     border-radius: 20px;
-    background: rgba(255, 254, 250, 0.92);
+    background: rgb(255 255 255 / 0.94);
     backdrop-filter: blur(12px);
     box-shadow:
-      0 24px 50px -20px rgba(15, 15, 12, 0.35),
-      0 0 0 1px rgba(15, 15, 12, 0.06);
+      0 24px 50px -20px rgb(var(--shadow) / 0.35),
+      0 0 0 1px rgb(var(--shadow) / 0.06);
   }
   .app-icon {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: var(--cyan);
-    color: var(--ink);
+    background: var(--turquoise);
+    color: var(--charcoal);
     display: grid;
     place-items: center;
     font-weight: 800;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     letter-spacing: -0.04em;
   }
   .from {
     font-size: 0.75rem;
-    color: var(--muted);
+    color: var(--body);
   }
   .title {
     font-weight: 600;
   }
   .body {
     font-size: 0.92rem;
-    color: #3a3a36;
+    color: var(--body);
   }
 </style>

@@ -1,7 +1,7 @@
 ---
 /** Add it: an expense in the Oduduwa Estate flat, and its edit history. */
 const people = [
-  { name: 'You', colour: '#4ED2D4', share: '₦6,000' },
+  { name: 'You', colour: '#49CBCD', share: '₦6,000' },
   { name: 'Gbayin', colour: '#1859C3', share: '₦6,000' },
   { name: 'Macky', colour: '#F4E04D', share: '₦6,000' },
   { name: 'Ini', colour: '#FF4242', share: '₦6,000' },
@@ -55,9 +55,10 @@ const people = [
 
 <style>
   .add {
-    background: var(--canvas);
+    background: var(--cream-deep);
   }
   .points {
+    color: var(--body);
     margin: 0;
     padding-left: 1.1rem;
     display: flex;
@@ -81,7 +82,7 @@ const people = [
   }
   .taab-name {
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--body);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -90,7 +91,7 @@ const people = [
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--cyan);
+    background: var(--turquoise);
   }
   .what {
     font-weight: 600;
@@ -104,7 +105,7 @@ const people = [
     line-height: 1.1;
   }
   .meta {
-    color: var(--muted);
+    color: var(--body);
     font-size: 0.9rem;
   }
   .expense ul {
@@ -120,7 +121,7 @@ const people = [
     align-items: center;
     gap: 10px;
     padding: 10px 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--border);
   }
   .dot {
     width: 22px;
@@ -132,7 +133,8 @@ const people = [
     text-align: center;
     padding: 14px;
     border-radius: 16px;
-    background: var(--cyan);
+    background: var(--turquoise);
+    color: var(--charcoal);
     font-weight: 600;
   }
   .history {
@@ -143,7 +145,7 @@ const people = [
   }
   .history-title {
     font-size: 0.8rem;
-    color: var(--muted);
+    color: var(--body);
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
@@ -155,11 +157,11 @@ const people = [
     font-weight: 600;
   }
   .diff s {
-    color: var(--muted);
+    color: var(--body);
     font-weight: 400;
   }
   .when {
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--body);
   }
 </style>

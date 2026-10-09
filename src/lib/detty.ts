@@ -13,7 +13,7 @@ export type Person = { id: string; name: string; colour: string; initial: string
 export type Debt = { from: string; to: string; amount: number };
 
 export const PEOPLE: Person[] = [
-  { id: 'you', name: 'You', colour: '#4ED2D4', initial: 'Y' },
+  { id: 'you', name: 'You', colour: '#49CBCD', initial: 'Y' },
   { id: 'gbayin', name: 'Gbayin', colour: '#1859C3', initial: 'G' },
   { id: 'macky', name: 'Macky', colour: '#F4E04D', initial: 'M' },
   { id: 'ini', name: 'Ini', colour: '#FF4242', initial: 'I' },

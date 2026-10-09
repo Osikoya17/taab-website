@@ -1,0 +1,248 @@
+---
+/**
+ * Coming next: Taab AI. Marked clearly as coming, since the app doesn't do this
+ * yet. A sentence types itself and taab shows the expense it would prepare.
+ * The shares are worked out the app's way: food ₦36,000 ÷ 4 and drinks
+ * ₦12,000 ÷ 3, so the three who drank pay ₦13,000 and David pays ₦9,000.
+ */
+const SENTENCE = 'I paid 48k for dinner at Red Horn with Gbayin, Macky and David. David didn’t drink, drinks were 12k.';
+const shares = [
+  { name: 'You', colour: '#49CBCD', amount: '₦13,000' },
+  { name: 'Gbayin', colour: '#1859C3', amount: '₦13,000' },
+  { name: 'Macky', colour: '#F4E04D', amount: '₦13,000' },
+  { name: 'David', colour: '#FFFEFA', amount: '₦9,000' },
+];
+const features = [
+  { title: 'Just say what happened', text: 'Type a sentence the way you’d tell a friend, and taab fills in the expense for you.' },
+  { title: 'Part of a bill', text: '“Only three of us had drinks” becomes the right shares, with the working shown.' },
+  { title: 'Say it out loud', text: 'Send a voice note instead of typing, for when you’re in a hurry.' },
+  { title: 'taab checks with you', text: 'If something is unclear, taab asks instead of guessing. Nothing is saved until you confirm.' },
+];
+---
+
+<section class="section coming on-dark" aria-labelledby="coming-title">
+  <div class="section-inner">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow"><span class="badge">Coming next</span> Taab AI</p>
+      <h2 id="coming-title">Just say what happened.</h2>
+      <p class="lede">
+        Recording every expense is the part people find most tiring. Soon you’ll be able to type or say what happened, and taab will prepare the expense for you to check.
+      </p>
+    </div>
+
+    <div class="demo split-layout">
+      <div class="prompt" data-reveal>
+        <p class="prompt-label">You type</p>
+        <p class="typed" data-typed={SENTENCE}><span data-typed-text>{SENTENCE}</span><i class="caret" aria-hidden="true"></i></p>
+      </div>
+
+      <div class="draft" data-reveal style="--d: 200ms" data-draft>
+        <p class="draft-label">taab prepares</p>
+        <p class="draft-title">Dinner at Red Horn</p>
+        <p class="draft-total tabular">₦48,000</p>
+        <p class="draft-meta">Paid by you · yesterday</p>
+        <ul>
+          {
+            shares.map((s) => (
+              <li>
+                <span class="dot" style={`background:${s.colour}`} />
+                <span>{s.name}</span>
+                <b class="tabular">{s.amount}</b>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="working">Food ₦36,000 ÷ 4 = ₦9,000 each. Drinks ₦12,000 ÷ 3 = ₦4,000 each.</p>
+        <span class="confirm">Confirm expense</span>
+      </div>
+    </div>
+
+    <ul class="features">
+      {
+        features.map((f, i) => (
+          <li data-reveal style={`--d:${i * 80}ms`}>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Colours come from .on-dark in global.css. */
+  .coming .eyebrow {
+    color: var(--on-dark-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge {
+    background: var(--turquoise);
+    color: var(--charcoal);
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+  }
+  .demo {
+    align-items: stretch;
+  }
+  .prompt,
+  .draft {
+    border-radius: 24px;
+    padding: 22px;
+  }
+  .prompt {
+    background: var(--dark-raised);
+    border: 1px solid var(--dark-border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .prompt-label,
+  .draft-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+  .typed {
+    font-size: clamp(1.25rem, 4vw, 1.6rem);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    min-height: 5.4em;
+  }
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: -0.15em;
+    background: var(--turquoise);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .draft {
+    background: var(--on-dark);
+    color: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .draft-label {
+    color: var(--body);
+  }
+  .draft-title {
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .draft-total {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+  .draft-meta {
+    color: var(--body);
+    font-size: 0.9rem;
+  }
+  .draft ul {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .draft li {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+  }
+  .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgb(var(--shadow) / 0.15);
+  }
+  .working {
+    font-size: 0.85rem;
+    color: var(--body);
+    margin-top: 8px;
+  }
+  .confirm {
+    margin-top: 14px;
+    text-align: center;
+    padding: 13px;
+    border-radius: 16px;
+    background: var(--turquoise);
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 720px) {
+    .features {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .features li {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--dark-raised);
+    border: 1px solid var(--dark-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .features h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--turquoise);
+  }
+  .features p {
+    color: var(--on-dark-muted);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .caret {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // Types the sentence once when it comes into view; the full sentence is in the page for everyone else.
+  const box = document.querySelector<HTMLElement>('[data-typed]');
+  const text = box?.querySelector<HTMLElement>('[data-typed-text]');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (box && text && !still) {
+    const full = box.dataset.typed ?? '';
+    text.textContent = '';
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        let i = 0;
+        const tick = () => {
+          i += 1;
+          text.textContent = full.slice(0, i);
+          if (i < full.length) setTimeout(tick, full[i - 1] === ' ' ? 45 : 28);
+        };
+        setTimeout(tick, 300);
+      },
+      { rootMargin: '0px 0px -20% 0px' },
+    );
+    io.observe(box);
+  }
+</script>

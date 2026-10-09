@@ -9,7 +9,7 @@ import { DIRECT, SIMPLIFIED, naira, personById, type Debt } from '../lib/detty';
 const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amount: naira(d.amount) });
 ---
 
-<section class="settle" id="settle" aria-labelledby="settle-title">
+<section class="settle on-dark" id="settle" aria-labelledby="settle-title">
   <div class="inner">
     <header>
       <p class="eyebrow">Settle it · Detty December</p>
@@ -68,9 +68,8 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
 </section>
 
 <style>
+  /* Colours come from .on-dark in global.css. */
   .settle {
-    background: var(--ink);
-    color: var(--paper);
     padding-block: clamp(64px, 12vw, 120px);
     padding-inline: var(--gutter);
   }
@@ -91,17 +90,16 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
     font-size: 0.8rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--cyan);
+    color: var(--turquoise);
   }
   h2 {
     font-size: clamp(2.4rem, 9vw, 4.5rem);
     font-weight: 700;
   }
   .to {
-    color: var(--cyan);
+    color: var(--turquoise);
   }
   .lede {
-    color: rgba(255, 254, 250, 0.72);
     max-width: 44ch;
   }
   .compare {
@@ -124,10 +122,10 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
   }
   .label {
     font-size: 0.85rem;
-    color: rgba(255, 254, 250, 0.6);
+    color: var(--on-dark-muted);
   }
   .after .label {
-    color: var(--cyan);
+    color: var(--turquoise);
   }
   .slips {
     list-style: none;
@@ -144,14 +142,14 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
     gap: 12px;
     padding: 14px 16px;
     border-radius: 16px;
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--on-dark);
+    color: var(--charcoal);
   }
   .slips i {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(15, 15, 12, 0.15);
+    box-shadow: 0 0 0 1px rgb(var(--shadow) / 0.15);
   }
   .slips span {
     min-width: 0;
@@ -167,8 +165,8 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
     font-style: normal;
     font-weight: 600;
     font-size: 0.85rem;
-    background: var(--cyan);
-    color: var(--ink);
+    background: var(--turquoise);
+    color: var(--charcoal);
     padding: 8px 12px;
     border-radius: 12px;
     white-space: nowrap;
@@ -176,8 +174,9 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
   /* The six "before" payments are quieter and denser. */
   .small li {
     padding: 10px 14px;
-    background: rgba(255, 254, 250, 0.08);
-    color: rgba(255, 254, 250, 0.85);
+    background: var(--dark-raised);
+    border: 1px solid var(--dark-border);
+    color: var(--on-dark);
     font-size: 0.92rem;
   }
   .small b {
@@ -195,7 +194,7 @@ const slip = (d: Debt) => ({ from: personById(d.from), to: personById(d.to), amo
     display: flex;
     flex-direction: column;
     gap: 6px;
-    color: rgba(255, 254, 250, 0.72);
+    color: var(--on-dark-muted);
     font-size: 0.95rem;
   }
   @media (max-width: 400px) {
